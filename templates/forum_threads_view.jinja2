@@ -1,0 +1,41 @@
+{% extends "forum_base.jinja2" %}
+
+{% if board %}
+    {% set active_board_id = board.id %}
+{% endif %}
+
+{% block forum_content %}
+    <div class="row">
+        <div class="small-12 columns">
+            <div class="board-threads-panel panel">
+                <div class="header-container clearfix">
+                    <h4 class="left">{{ title }}</h4>
+                    {% if can_post %}
+                        {% if current_user.is_authenticated() %}
+                            <a class="button tiny right" href="{{ url_for("forum.ThreadPostView:get", board_text_id=board.text_id) }}">New thread</a>
+                        {% else %}
+                            <a class="button tiny right disabled">Log in to post</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Thread</th>
+                            <th>Last post</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for thread in threads %}
+                            <tr>
+                                <td><a href="{{ url_for('forum.ThreadView:get_1', thread_id=thread.id) }}">{{ thread.title }}</a></td>
+                                <td>Test2</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

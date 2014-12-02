@@ -1,0 +1,26 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+    <div class="row">
+        <div class="small-3 columns">
+            <div class="sidebar">
+                <ul class="link-list">
+                    <li class="{{ "link-active" if active_board_id == "recent" }}">
+                        <a href="/">Recent posts</a>
+                    </li>
+                    <li><h6>Boards</h6></li>
+                    {% for list_board in get_boards() %}
+                        <li id="link-list-board-{{ list_board.id }}" class="{{ "link-active" if list_board.id == active_board_id or (board and list_board.id == board.id) else "" }}">
+                            <a href="{{ url_for("forum.BoardView:get", text_id=list_board.text_id) }}">{{ list_board.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="small-9 columns">
+            {% block forum_content %}
+
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

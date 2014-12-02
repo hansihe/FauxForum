@@ -1,0 +1,35 @@
+{% extends "base.jinja2" %}
+
+{% macro render_button(form, name) %}
+    {% set input = getattr(form, name) %}
+    {% set has_error = name in form.errors %}
+    {% set error_class = "error " if has_error else "" %}
+
+    {{ input.label(class=error_class) }}
+    {{ input(class=error_class) }}
+    {% if has_error %}
+        <small class="error">{{ input.errors[0] }}</small>
+    {% endif %}
+{% endmacro %}
+
+{% block content %}
+    <div class="row">
+        <div class="small-4 small-centered columns">
+            <div class="panel">
+                <h5>Log in</h5>
+                <form action="." method="post">
+                    {{ form.csrf_token() }}
+
+                    {{ render_button(form, "username") }}
+                    {{ render_button(form, "password") }}
+
+                    <p>Don't have an account? <a href="{{ url_for("auth.RegisterView:index") }}">Register</a> instead.</p>
+
+                    <div class="clearfix">
+                        {{ form.submit(class="button right cut-bottom") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

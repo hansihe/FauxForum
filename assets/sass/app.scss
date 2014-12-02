@@ -1,0 +1,107 @@
+@import "foundation";
+
+.main-top-bar {
+  margin-bottom: rem-calc(16px);
+}
+
+@mixin cut-bottom {
+  margin: 0;
+}
+
+.cut-bottom {
+  margin: 0;
+}
+
+.header-sub {
+  color: lighten($body-font-color, 30);
+}
+
+.player-name {
+  color: #7154c8 !important;
+}
+
+.sidebar {
+  @include panel($padding: rem-calc(20) 0 rem-calc(20) 0);
+
+  h6 {
+    margin: rem-calc(2) rem-calc(15) rem-calc(6) rem-calc(15);
+  }
+
+  ul.link-list {
+    margin: 0;
+
+    li {
+      list-style: none;
+
+      &.link-active {
+        a {
+          background-color: darken($panel-bg, 5);
+
+          &:hover {
+            background-color: darken($panel-bg, 2);
+          }
+        }
+      }
+
+      h6 {
+        margin-top: rem-calc(16);
+      }
+
+      a {
+        display: block;
+        width: 100%;
+        padding: rem-calc(2) rem-calc(20);
+
+        &:hover {
+          background-color: darken($panel-bg, 4);
+        }
+      }
+    }
+  }
+}
+
+.board-threads-panel {
+  padding: 0;
+
+  .header-container {
+    padding: rem-calc(20);
+
+    & > * {
+      @include cut-bottom;
+    }
+  }
+
+  table {
+    width: 100%;
+
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+}
+
+.thread-post-panel {
+  @include panel($padding: 6px);
+
+  .meta {
+    border: solid 1px scale-color($panel-bg, $lightness: $panel-function-factor);
+    border-radius: 2px;
+    background-color: lighten($panel-bg, 2);
+    padding: rem-calc(3);
+
+    .user-name {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      padding: 5px;
+      padding-bottom: 4px;
+    }
+
+    .post-date {
+      font-size: 0.8rem;
+      color: #555555;
+      padding: 5px;
+      padding-top: 0;
+    }
+
+  }
+}

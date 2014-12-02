@@ -1,0 +1,32 @@
+{% extends "forum_base.jinja2" %}
+
+{% macro render_button(form, name) %}
+    {% set input = getattr(form, name) %}
+    {% set has_error = name in form.errors %}
+    {% set error_class = "error " if has_error else "" %}
+
+    {{ input.label(class=error_class) }}
+    {{ input(class=error_class) }}
+    {% if has_error %}
+        <small class="error">{{ input.errors[0] }}</small>
+    {% endif %}
+{% endmacro %}
+
+{% block forum_content %}
+    <div class="row">
+        <div class="small-12 columns">
+            <div class="panel">
+                <h5>Submit reply <span class="header-sub">to "{{ thread.title }}"</span></h5>
+
+                <form action="." method="post">
+                    {{ form.csrf_token() }}
+
+                    {{ render_button(form, 'content') }}
+
+                    {{ form.submit(class="button cut-bottom right") }}
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
