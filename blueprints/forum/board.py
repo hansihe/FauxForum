@@ -5,7 +5,9 @@ from flask.ext.classy import FlaskView
 from sqlalchemy.orm.exc import NoResultFound
 from models.board import Board
 from models.thread import Thread
+from models.post import Post
 from . import blueprint
+from ext import db
 
 
 class BoardView(FlaskView):
@@ -15,7 +17,19 @@ class BoardView(FlaskView):
         except NoResultFound:
             return abort(404)
 
-        threads = Thread.query.filter_by(board_id=board.id).order_by(Thread.id.desc()).all()
+        threads = db.session.query(Thread, Post)\
+            .filter_by(board_id=board.id)\
+            .order_by(Thread.id.desc())\
+            .join(Post, Thread.id == Post.thread_id)\
+            .all()
+
+        print(db.session.query(Thread, Post)
+              .filter_by(board_id=board.id)
+              .order_by(Thread.id.desc())
+              .join(Post, Thread.id == Post.thread_id).statement)
+
+        for thread in threads:
+            print(thread.__dict__)
 
         return render_template("forum_threads_view.jinja2", board=board, title=board.name, can_post=True, threads=threads)
 

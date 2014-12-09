@@ -3,6 +3,7 @@ __author__ = 'hansihe'
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.bcrypt import Bcrypt
 from flask.ext.login import LoginManager
+from flask.ext.markdown import Markdown
 
 
 db = SQLAlchemy()
@@ -17,3 +18,5 @@ def init(app):
     bcrypt.init_app(app)
 
     login.init_app(app)
+
+    markdown = Markdown(app)

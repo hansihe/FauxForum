@@ -19,7 +19,7 @@
                     {% endif %}
                 </div>
 
-                <table>
+                <table class="threads-table">
                     <thead>
                         <tr>
                             <th>Thread</th>
@@ -27,10 +27,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for thread in threads %}
-                            <tr>
-                                <td><a href="{{ url_for('forum.ThreadView:get_1', thread_id=thread.id) }}">{{ thread.title }}</a></td>
-                                <td>Test2</td>
+                        {% for thread, last_post in threads %}
+                            <tr class="thread">
+                                <td>
+                                    <a class="thread-title" href="{{ url_for('forum.ThreadView:get_1', thread_id=thread.id) }}">{{ thread.title }}</a>
+                                    <span class="thread-author user-name-tint">{{ thread.author.username }}</span>
+                                </td>
+                                <td>
+                                    <span class="post-author">{{ thread.last_post }}</span>
+                                    <span class="post-date">Test</span>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>

@@ -16,7 +16,7 @@
   color: lighten($body-font-color, 30);
 }
 
-.player-name {
+.user-name-tint {
   color: #7154c8 !important;
 }
 
@@ -103,5 +103,25 @@
       padding-top: 0;
     }
 
+  }
+}
+
+.threads-table {
+  .thread {
+    .thread-title {
+      display: block;
+    }
+    .thread-author {
+      display: block;
+      font-size: 0.7rem;
+    }
+    .post-author {
+      display: block;
+    }
+    .post-date {
+      display: block;
+      /* line-height: 10px; */
+      font-size: 0.7rem;
+    }
   }
 }
