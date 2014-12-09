@@ -13,6 +13,10 @@
 @import "top_bar";
 @import "forum_sidebar";
 
+body {
+  background-image: url("/static/img/billie_holiday.png");
+}
+
 .main-top-bar {
   margin-bottom: rem-calc(16px);
 }
