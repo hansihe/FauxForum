@@ -1,0 +1,39 @@
+.sidebar {
+  @include panel($padding: rem-calc(20) 0 rem-calc(20) 0);
+
+  h6 {
+    margin: rem-calc(2) rem-calc(15) rem-calc(6) rem-calc(15);
+  }
+
+  ul.link-list {
+    margin: 0;
+
+    li {
+      list-style: none;
+
+      &.link-active {
+        a {
+          background-color: darken($panel-bg, 5);
+
+          &:hover {
+            background-color: darken($panel-bg, 2);
+          }
+        }
+      }
+
+      h6 {
+        margin-top: rem-calc(16);
+      }
+
+      a {
+        display: block;
+        width: 100%;
+        padding: rem-calc(2) rem-calc(20);
+
+        &:hover {
+          background-color: darken($panel-bg, 4);
+        }
+      }
+    }
+  }
+}

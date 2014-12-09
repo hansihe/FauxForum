@@ -20,7 +20,7 @@ js_main = Bundle(assets_folder + 'js/jquery-2.1.1.js',
                  filters=None if app.debug else 'rjsmin', output='gen/js/main.%(version)s.js')
 environment.register('js_main', js_main)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 
 import ext
 ext.init(app)
@@ -35,12 +35,17 @@ app.register_blueprint(auth.blueprint)
 app.register_blueprint(forum.blueprint)
 
 from models.thread import Thread
+from models.post import Post
+from sqlalchemy.orm import aliased
+
 @app.route('/')
 def index():
-    threads = Thread.query.order_by(Thread.id.desc())
+    last_post = Post.query.order_by(Post.id.desc()).limit(1).subquery()
+    last_post_alias = aliased(Post, last_post)
+    threads = ext.db.session.query(Thread, last_post_alias).join(last_post_alias, Thread.id == last_post_alias.thread_id).order_by(Thread.id.desc()).all()
+    print(threads[0][1].__dict__)
     return render_template("forum_threads_view.jinja2", active_board_id="recent", title="Recent threads",
                            threads=threads)
 
 if __name__ == '__main__':
-    print(app.url_map)
     app.run(port=8181, debug=True)

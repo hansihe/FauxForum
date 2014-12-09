@@ -1,4 +1,17 @@
-@import "foundation";
+@import "foundation/components/grid";
+@import "foundation/components/alert-boxes";
+@import "foundation/components/buttons";
+@import "foundation/components/clearing";
+@import "foundation/components/forms";
+@import "foundation/components/pagination";
+@import "foundation/components/panels";
+@import "foundation/components/tables";
+@import "foundation/components/tooltips";
+@import "foundation/components/type";
+@import "foundation/components/visibility";
+
+@import "top_bar";
+@import "forum_sidebar";
 
 .main-top-bar {
   margin-bottom: rem-calc(16px);
@@ -18,46 +31,6 @@
 
 .user-name-tint {
   color: #7154c8 !important;
-}
-
-.sidebar {
-  @include panel($padding: rem-calc(20) 0 rem-calc(20) 0);
-
-  h6 {
-    margin: rem-calc(2) rem-calc(15) rem-calc(6) rem-calc(15);
-  }
-
-  ul.link-list {
-    margin: 0;
-
-    li {
-      list-style: none;
-
-      &.link-active {
-        a {
-          background-color: darken($panel-bg, 5);
-
-          &:hover {
-            background-color: darken($panel-bg, 2);
-          }
-        }
-      }
-
-      h6 {
-        margin-top: rem-calc(16);
-      }
-
-      a {
-        display: block;
-        width: 100%;
-        padding: rem-calc(2) rem-calc(20);
-
-        &:hover {
-          background-color: darken($panel-bg, 4);
-        }
-      }
-    }
-  }
 }
 
 .board-threads-panel {
