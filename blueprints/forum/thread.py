@@ -14,6 +14,7 @@ from models.post import Post
 from sqlalchemy.orm.exc import NoResultFound
 from ext import db
 from flask.ext.login import current_user
+import bleach
 
 
 class ThreadPostForm(Form):
@@ -68,6 +69,14 @@ class ThreadPostView(FlaskView):
 
 ThreadPostView.register(blueprint)
 
+import markdown
+import mdx_oembed
+md = markdown.Markdown(extensions=[mdx_oembed.makeExtension({})])
+
+
+def render_markdown(text):
+    return md.convert(bleach.clean(text))
+
 
 class ThreadView(FlaskView):
     route_base = "/thread/<int:thread_id>"
@@ -85,7 +94,7 @@ class ThreadView(FlaskView):
 
         return render_template("forum_thread_view.jinja2", thread=thread, posts=posts,
                                posts_pagination=posts_pagination, board=thread.board,
-                               reply_form=ThreadReplyForm())
+                               reply_form=ThreadReplyForm(), render_markdown=render_markdown)
 
     @classy_route('/post')
     def post(self):

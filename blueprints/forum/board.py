@@ -18,9 +18,10 @@ class BoardView(FlaskView):
         except NoResultFound:
             return abort(404)
 
-        last_post = Post.query.order_by(Post.id.desc()).limit(1).subquery()
-        last_post_alias = aliased(Post, last_post)
-        threads = db.session.query(Thread, last_post_alias).filter_by(board_id=board.id).join(last_post_alias, Thread.id == last_post_alias.thread_id).order_by(Thread.id.desc()).all()
+        #last_post = Post.query.order_by(Post.id.desc()).limit(1).subquery()
+        #last_post_alias = aliased(Post, last_post)
+        # threads = db.session.query(Thread, last_post_alias).filter_by(board_id=board.id).join(last_post_alias, Thread.id == last_post_alias.thread_id).order_by(Thread.id.desc()).all()
+        threads = db.session.query(Thread).filter_by(board_id=board.id).order_by(Thread.id.desc()).all()
 
         #threads = db.session.query(Thread, Post)\
         #    .filter_by(board_id=board.id)\
@@ -36,6 +37,7 @@ class BoardView(FlaskView):
         #for thread in threads:
         #    print(thread.__dict__)
 
-        return render_template("forum_threads_view.jinja2", board=board, title=board.name, can_post=True, threads=threads)
+        return render_template("forum_threads_view.jinja2", board=board, title=board.name, can_post=True,
+                               threads=threads)
 
 BoardView.register(blueprint)

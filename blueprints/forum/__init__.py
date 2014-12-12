@@ -3,6 +3,6 @@ __author__ = 'hansihe'
 from flask import Blueprint
 
 
-blueprint = Blueprint("forum", "auth")
+blueprint = Blueprint("forum", "forum")
 
 import board, thread

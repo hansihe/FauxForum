@@ -27,16 +27,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for thread, post in threads %}
+                        {% for thread in threads %}
                             <tr class="thread">
                                 <td>
                                     <a class="thread-title" href="{{ url_for('forum.ThreadView:get_1', thread_id=thread.id) }}">{{ thread.title }}</a>
                                     <span class="thread-author user-name-tint">{{ thread.author.username }}</span>
                                 </td>
-                                <td>
+                                {# <td>
                                     <span class="post-author user-name-tint">{{ post.author.username }}</span>
                                     <span class="post-date">{{ full_date(post.creation_time) }}</span>
-                                </td>
+                                </td> #}
                             </tr>
                         {% endfor %}
                     </tbody>
