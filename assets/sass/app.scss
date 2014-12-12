@@ -102,3 +102,22 @@ body {
     }
   }
 }
+
+.contact-button {
+  position: absolute;
+  bottom: 0px;
+  right: 0;
+
+  a {
+    display: block;
+    padding: 6px;
+    background-color: #bbb;
+    text-decoration: none;
+    color: #222;
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

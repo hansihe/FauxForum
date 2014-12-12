@@ -40,9 +40,11 @@ from sqlalchemy.orm import aliased
 
 @app.route('/')
 def index():
-    last_post = Post.query.order_by(Post.id.desc()).limit(1).subquery()
-    last_post_alias = aliased(Post, last_post)
-    threads = ext.db.session.query(Thread, last_post_alias).join(last_post_alias, Thread.id == last_post_alias.thread_id).order_by(Thread.id.desc()).all()
+    #last_post = Post.query.order_by(Post.id.desc()).limit(1).subquery()
+    #last_post_alias = aliased(Post, last_post)
+    #threads = ext.db.session.query(Thread, last_post_alias).join(last_post_alias, Thread.id == last_post_alias.thread_id).order_by(Thread.id.desc()).all()
+    threads = ext.db.session.query(Thread).order_by(Thread.id.desc()).all()
+
     print(threads)
     return render_template("forum_threads_view.jinja2", active_board_id="recent", title="Recent threads",
                            threads=threads)
